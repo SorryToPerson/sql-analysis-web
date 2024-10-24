@@ -1,0 +1,106 @@
+{
+  "source_data": [
+    {
+      "name": "salary",
+      "type": "table"
+    },
+    {
+      "name": "employee",
+      "type": "table"
+    },
+    {
+      "name": "department",
+      "type": "table"
+    },
+    {
+      "name": "bonus",
+      "type": "table"
+    }
+  ],
+  "sql_statements": [
+    {
+      "type": "INSERT INTO",
+      "source_tables": [
+        {
+          "name": "salary",
+          "alias": "s",
+          "columns": ["employee_id", "salary"]
+        }
+      ],
+      "joins": [],
+      "lateral_views": [],
+      "select_columns": ["s.employee_id", "SUM(s.salary) AS total_salary"],
+      "where_clause": null,
+      "target_table": {
+        "name": "tmp_salary",
+        "columns": ["employee_id", "total_salary"]
+      },
+      "partition": null
+    },
+    {
+      "type": "CREATE OR REPLACE VIEW",
+      "source_tables": [
+        {
+          "name": "employee",
+          "alias": "e",
+          "columns": ["employee_id", "name", "gender", "date_of_birth", "date_of_hire"]
+        },
+        {
+          "name": "department",
+          "alias": "d",
+          "columns": ["department_name"]
+        },
+        {
+          "name": "tmp_salary",
+          "alias": "ts",
+          "columns": ["total_salary"]
+        },
+        {
+          "name": "bonus",
+          "alias": "b",
+          "columns": ["bonus"]
+        }
+      ],
+      "joins": [
+        {
+          "type": "INNER JOIN",
+          "table": "department",
+          "on_conditions": [
+            {
+              "source_column": "e.department_id",
+              "target_column": "d.department_id"
+            }
+          ]
+        },
+        {
+          "type": "INNER JOIN",
+          "table": "tmp_salary",
+          "on_conditions": [
+            {
+              "source_column": "e.employee_id",
+              "target_column": "ts.employee_id"
+            }
+          ]
+        },
+        {
+          "type": "LEFT OUTER JOIN",
+          "table": "bonus",
+          "on_conditions": [
+            {
+              "source_column": "e.employee_id",
+              "target_column": "b.employee_id"
+            }
+          ]
+        }
+      ],
+      "lateral_views": [],
+      "select_columns": ["e.employee_id", "e.name", "e.gender", "e.date_of_birth", "e.date_of_hire", "d.department_name", "ts.total_salary", "b.bonus"],
+      "where_clause": null,
+      "target_table": {
+        "name": "employee_income",
+        "columns": ["employee_id", "name", "gender", "date_of_birth", "date_of_hire", "department_name", "total_salary", "bonus"]
+      },
+      "partition": null
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+	"source": [
+		{
+			"columns": [
+				"t1.id",
+				"t1.report_no",
+				"t1.status",
+				"coalesce(status.meta_value, t1.status) status_name",
+				"t1.source",
+				"coalesce(source.meta_value, t1.source) source_name",
+				"t1.seppage_path",
+				"coalesce(t1.loss_type, 'illness') loss_type",
+				"coalesce(loss_type.meta_value, t1.loss_type) loss_type_name",
+				"t4.area_name accident_area_name",
+				"t1.accident_place",
+				"t1.accident_process",
+				"t1.reporter",
+				"t1.reporter_insured_relation",
+				"coalesce(reporter_insured_relation.meta_value, t1.reporter_insured_relation) reporter_insured_relation_name",
+				"t1.is_deleted",
+				"t1.allow_dispatch",
+				"t1.istpadispatch",
+				"t1.email",
+				"extra_info.masterInsuredInfo",
+				"extra_info.isNeedClaimDivision",
+				"extra_info.planCodeList",
+				"extra_info.materialSmsSend",
+				"extra_info.customerNo",
+				"extra_info.accidentDate",
+				"extra_info.sysLocMobileNo",
+				"extra_info.syncVersion",
+				"extra_info.claimReturnChannelKey",
+				"extra_info.importDataSource",
+				"risk_remark.riskName",
+				"risk_remark.riskDetail",
+				"risk_remark.riskResult"
+			],
+			"name": "selectColumns0",
+			"type": "selectColumns"
+		},
+		{
+			"alias": "t1",
+			"columns": [
+				"id",
+				"report_no",
+				"status",
+				"source",
+				"seppage_path",
+				"loss_type",
+				"accident_place",
+				"accident_process",
+				"reporter",
+				"reporter_insured_relation",
+				"is_deleted",
+				"allow_dispatch",
+				"istpadispatch",
+				"email",
+				"extra_info",
+				"pt"
+			],
+			"name": "za_ha_prd.ods_ha_claim_application_all",
+			"type": "sourceTable"
+		},
+		{
+			"alias": "t2",
+			"columns": [
+				"claim_application_id",
+				"pt",
+				"is_deleted",
+				"risk_remark"
+			],
+			"name": "za_ha_prd.ods_ha_claim_application_extra_info_all",
+			"type": "sourceTable"
+		},
+		{
+			"alias": "t3",
+			"columns": [
+				"report_no",
+				"loss_code_name"
+			],
+			"name": "edw_ha_claim_application__loss_code",
+			"type": "sourceTable"
+		},
+		{
+			"alias": "t4",
+			"columns": [
+				"pt",
+				"report_no",
+				"area_name"
+			],
+			"name": "tmp_ha_claim_application__accident_area",
+			"type": "sourceTable"
+		},
+		{
+			"alias": "status",
+			"columns": [
+				"src_key",
+				"meta_value",
+				"tb_name",
+				"cl_name"
+			],
+			"name": "pub_ha_code_value_dim",
+			"type": "sourceTable"
+		},
+		{
+			"alias": "case_mark",
+			"columns": [
+				"src_key",
+				"meta_value",
+				"tb_name",
+				"cl_name"
+			],
+			"name": "pub_ha_code_value_dim",
+			"type": "sourceTable"
+		},
+		{
+			"alias": "tpa_source",
+			"columns": [
+				"src_key",
+				"meta_value",
+				"tb_name",
+				"cl_name"
+			],
+			"name": "pub_ha_code_value_dim",
+			"type": "sourceTable"
+		},
+		{
+			"alias": "source",
+			"columns": [
+				"src_key",
+				"meta_value",
+				"tb_name",
+				"cl_name"
+			],
+			"name": "pub_ha_code_value_dim",
+			"type": "sourceTable"
+		},
+		{
+			"alias": "loss_type",
+			"columns": [
+				"src_key",
+				"meta_value",
+				"tb_name",
+				"cl_name"
+			],
+			"name": "pub_ha_code_value_dim",
+			"type": "sourceTable"
+		},
+		{
+			"alias": "reporter_insured_relation",
+			"columns": [
+				"src_key",
+				"meta_value",
+				"tb_name",
+				"cl_name"
+			],
+			"name": "pub_ha_code_value_dim",
+			"type": "sourceTable"
+		},
+		{
+			"alias": "case_tag",
+			"columns": [
+				"src_key",
+				"meta_value",
+				"tb_name",
+				"cl_name"
+			],
+			"name": "pub_ha_code_value_dim",
+			"type": "sourceTable"
+		}
+	],
+	"statements": [
+		{
+			"mappings": [
+				{
+					"sourceColumn": "id",
+					"targetColumn": "t1.id"
+				},
+				{
+					"sourceColumn": "report_no",
+					"targetColumn": "t1.report_no"
+				},
+				{
+					"sourceColumn": "status",
+					"targetColumn": "t1.status"
+				},
+				{
+					"sourceColumn": "source",
+					"targetColumn": "t1.source"
+				},
+				{
+					"sourceColumn": "seppage_path",
+					"targetColumn": "t1.seppage_path"
+				},
+				{
+					"sourceColumn": "accident_place",
+					"targetColumn": "t1.accident_place"
+				},
+				{
+					"sourceColumn": "accident_process",
+					"targetColumn": "t1.accident_process"
+				},
+				{
+					"sourceColumn": "reporter",
+					"targetColumn": "t1.reporter"
+				},
+				{
+					"sourceColumn": "reporter_insured_relation",
+					"targetColumn": "t1.reporter_insured_relation"
+				},
+				{
+					"sourceColumn": "is_deleted",
+					"targetColumn": "t1.is_deleted"
+				},
+				{
+					"sourceColumn": "allow_dispatch",
+					"targetColumn": "t1.allow_dispatch"
+				},
+				{
+					"sourceColumn": "istpadispatch",
+					"targetColumn": "t1.istpadispatch"
+				},
+				{
+					"sourceColumn": "email",
+					"targetColumn": "t1.email"
+				}
+			],
+			"source": "za_ha_prd.ods_ha_claim_application_all",
+			"target": "selectColumns0"
+		},
+		{
+			"mappings": [],
+			"source": "za_ha_prd.ods_ha_claim_application_extra_info_all",
+			"target": "selectColumns0"
+		},
+		{
+			"mappings": [],
+			"source": "edw_ha_claim_application__loss_code",
+			"target": "selectColumns0"
+		},
+		{
+			"mappings": [],
+			"source": "tmp_ha_claim_application__accident_area",
+			"target": "selectColumns0"
+		},
+		{
+			"mappings": [],
+			"source": "pub_ha_code_value_dim",
+			"target": "selectColumns0"
+		},
+		{
+			"mappings": [],
+			"source": "pub_ha_code_value_dim",
+			"target": "selectColumns0"
+		},
+		{
+			"mappings": [],
+			"source": "pub_ha_code_value_dim",
+			"target": "selectColumns0"
+		},
+		{
+			"mappings": [],
+			"source": "pub_ha_code_value_dim",
+			"target": "selectColumns0"
+		},
+		{
+			"mappings": [],
+			"source": "pub_ha_code_value_dim",
+			"target": "selectColumns0"
+		},
+		{
+			"mappings": [],
+			"source": "pub_ha_code_value_dim",
+			"target": "selectColumns0"
+		},
+		{
+			"mappings": [],
+			"source": "pub_ha_code_value_dim",
+			"target": "selectColumns0"
+		}
+	]
+}

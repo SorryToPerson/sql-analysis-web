@@ -1,0 +1,182 @@
+{
+	"source_data": [
+		{
+			"name": "odps_user_tags_bhcs",
+			"type": "foreign_table",
+			"server": "odps_server",
+			"options": {
+				"project_name": "za_jr_prd",
+				"table_name": "adm_fin_user_tags_bhcs"
+			}
+		}
+	],
+	"sql_statements": [
+		{
+			"type": "CREATE TABLE",
+			"target_table": {
+				"name": "user_tags_bhcs",
+				"columns": [
+					"pt",
+					"user_id",
+					"third_user_no",
+					"regist_phone",
+					"certi_no",
+					"product_code",
+					"is_longterm_control_group",
+					"is_total_black_list_flag",
+					"overdue_days_max",
+					"t2_owner_call",
+					"t6_owner_call",
+					"t13_owner_call",
+					"t20_owner_call",
+					"t29_owner_call",
+					"t44_owner_call",
+					"ytx_cur_agreed_free_amt",
+					"ytx_is_cur_agreed_used_coupon",
+					"ytx_is_fst_installment_no_overdue"
+				]
+			},
+			"partition": {
+				"type": "list",
+				"column": "pt"
+			}
+		},
+		{
+			"type": "CREATE FOREIGN TABLE",
+			"target_table": {
+				"name": "odps_user_tags_bhcs",
+				"columns": [
+					"pt",
+					"user_id",
+					"third_user_no",
+					"regist_phone",
+					"certi_no",
+					"product_code",
+					"is_longterm_control_group",
+					"is_total_black_list_flag",
+					"overdue_days_max",
+					"t2_owner_call",
+					"t6_owner_call",
+					"t13_owner_call",
+					"t20_owner_call",
+					"t29_owner_call",
+					"t44_owner_call",
+					"ytx_cur_agreed_free_amt",
+					"ytx_is_cur_agreed_used_coupon",
+					"ytx_is_fst_installment_no_overdue"
+				]
+			},
+			"server": "odps_server",
+			"options": {
+				"project_name": "za_jr_prd",
+				"table_name": "adm_fin_user_tags_bhcs"
+			}
+		},
+		{
+			"type": "CREATE TABLE PARTITION",
+			"target_table": {
+				"name": "user_tags_bhcs_${bizdate}",
+				"columns": [
+					"pt",
+					"user_id",
+					"third_user_no",
+					"regist_phone",
+					"certi_no",
+					"product_code",
+					"is_longterm_control_group",
+					"is_total_black_list_flag",
+					"overdue_days_max",
+					"t2_owner_call",
+					"t6_owner_call",
+					"t13_owner_call",
+					"t20_owner_call",
+					"t29_owner_call",
+					"t44_owner_call",
+					"ytx_cur_agreed_free_amt",
+					"ytx_is_cur_agreed_used_coupon",
+					"ytx_is_fst_installment_no_overdue"
+				]
+			},
+			"partition": {
+				"type": "list",
+				"value": "${bizdate}"
+			}
+		},
+		{
+			"type": "INSERT INTO",
+			"source_tables": [
+				{
+					"name": "odps_user_tags_bhcs",
+					"alias": null,
+					"columns": [
+						"pt",
+						"user_id",
+						"third_user_no",
+						"regist_phone",
+						"certi_no",
+						"product_code",
+						"is_longterm_control_group",
+						"is_total_black_list_flag",
+						"overdue_days_max",
+						"t2_owner_call",
+						"t6_owner_call",
+						"t13_owner_call",
+						"t20_owner_call",
+						"t29_owner_call",
+						"t44_owner_call",
+						"ytx_cur_agreed_free_amt",
+						"ytx_is_cur_agreed_used_coupon",
+						"ytx_is_fst_installment_no_overdue"
+					],
+					"partition_by": null
+				}
+			],
+			"joins": [],
+			"lateral_views": [],
+			"select_columns": [
+				"'${bizdate}' as pt",
+				"user_id",
+				"third_user_no",
+				"regist_phone",
+				"certi_no",
+				"product_code",
+				"is_longterm_control_group",
+				"is_total_black_list_flag",
+				"overdue_days_max",
+				"t2_owner_call",
+				"t6_owner_call",
+				"t13_owner_call",
+				"t20_owner_call",
+				"t29_owner_call",
+				"t44_owner_call",
+				"ytx_cur_agreed_free_amt",
+				"ytx_is_cur_agreed_used_coupon",
+				"ytx_is_fst_installment_no_overdue"
+			],
+			"where_clause": "pt = '${bizdate}000000'",
+			"target_table": {
+				"name": "user_tags_bhcs_${bizdate}",
+				"columns": [
+					"pt",
+					"user_id",
+					"third_user_no",
+					"regist_phone",
+					"certi_no",
+					"product_code",
+					"is_longterm_control_group",
+					"is_total_black_list_flag",
+					"overdue_days_max",
+					"t2_owner_call",
+					"t6_owner_call",
+					"t13_owner_call",
+					"t20_owner_call",
+					"t29_owner_call",
+					"t44_owner_call",
+					"ytx_cur_agreed_free_amt",
+					"ytx_is_cur_agreed_used_coupon",
+					"ytx_is_fst_installment_no_overdue"
+				]
+			}
+		}
+	]
+}

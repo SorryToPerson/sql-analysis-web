@@ -1,0 +1,303 @@
+{
+	"source": [
+		{
+			"alias": "",
+			"columns": [
+				"pt",
+				"user_id",
+				"third_user_no",
+				"regist_phone",
+				"certi_no",
+				"product_code",
+				"is_longterm_control_group",
+				"is_total_black_list_flag",
+				"overdue_days_max",
+				"t2_owner_call",
+				"t6_owner_call",
+				"t13_owner_call",
+				"t20_owner_call",
+				"t29_owner_call",
+				"t44_owner_call",
+				"ytx_cur_agreed_free_amt",
+				"ytx_is_cur_agreed_used_coupon",
+				"ytx_is_fst_installment_no_overdue"
+			],
+			"name": "user_tags_bhcs",
+			"type": "targetTable"
+		},
+		{
+			"alias": "",
+			"columns": [
+				"pt",
+				"user_id",
+				"third_user_no",
+				"regist_phone",
+				"certi_no",
+				"product_code",
+				"is_longterm_control_group",
+				"is_total_black_list_flag",
+				"overdue_days_max",
+				"t2_owner_call",
+				"t6_owner_call",
+				"t13_owner_call",
+				"t20_owner_call",
+				"t29_owner_call",
+				"t44_owner_call",
+				"ytx_cur_agreed_free_amt",
+				"ytx_is_cur_agreed_used_coupon",
+				"ytx_is_fst_installment_no_overdue"
+			],
+			"name": "odps_user_tags_bhcs",
+			"type": "targetTable"
+		},
+		{
+			"alias": "",
+			"columns": [
+				"pt",
+				"user_id",
+				"third_user_no",
+				"regist_phone",
+				"certi_no",
+				"product_code",
+				"is_longterm_control_group",
+				"is_total_black_list_flag",
+				"overdue_days_max",
+				"t2_owner_call",
+				"t6_owner_call",
+				"t13_owner_call",
+				"t20_owner_call",
+				"t29_owner_call",
+				"t44_owner_call",
+				"ytx_cur_agreed_free_amt",
+				"ytx_is_cur_agreed_used_coupon",
+				"ytx_is_fst_installment_no_overdue"
+			],
+			"name": "user_tags_bhcs_${bizdate}",
+			"type": "targetTable"
+		},
+		{
+			"alias": "",
+			"columns": [
+				"pt",
+				"user_id",
+				"third_user_no",
+				"regist_phone",
+				"certi_no",
+				"product_code",
+				"is_longterm_control_group",
+				"is_total_black_list_flag",
+				"overdue_days_max",
+				"t2_owner_call",
+				"t6_owner_call",
+				"t13_owner_call",
+				"t20_owner_call",
+				"t29_owner_call",
+				"t44_owner_call",
+				"ytx_cur_agreed_free_amt",
+				"ytx_is_cur_agreed_used_coupon",
+				"ytx_is_fst_installment_no_overdue"
+			],
+			"name": "user_tags_bhcs_${bizdate}",
+			"type": "targetTable"
+		},
+		{
+			"columns": [
+				"'${bizdate}' as pt",
+				"user_id",
+				"third_user_no",
+				"regist_phone",
+				"certi_no",
+				"product_code",
+				"is_longterm_control_group",
+				"is_total_black_list_flag",
+				"overdue_days_max",
+				"t2_owner_call",
+				"t6_owner_call",
+				"t13_owner_call",
+				"t20_owner_call",
+				"t29_owner_call",
+				"t44_owner_call",
+				"ytx_cur_agreed_free_amt",
+				"ytx_is_cur_agreed_used_coupon",
+				"ytx_is_fst_installment_no_overdue"
+			],
+			"name": "selectColumns",
+			"type": "selectColumns"
+		},
+		{
+			"alias": "",
+			"columns": [
+				"pt",
+				"user_id",
+				"third_user_no",
+				"regist_phone",
+				"certi_no",
+				"product_code",
+				"is_longterm_control_group",
+				"is_total_black_list_flag",
+				"overdue_days_max",
+				"t2_owner_call",
+				"t6_owner_call",
+				"t13_owner_call",
+				"t20_owner_call",
+				"t29_owner_call",
+				"t44_owner_call",
+				"ytx_cur_agreed_free_amt",
+				"ytx_is_cur_agreed_used_coupon",
+				"ytx_is_fst_installment_no_overdue"
+			],
+			"name": "odps_user_tags_bhcs",
+			"type": "sourceTable"
+		}
+	],
+	"statements": [
+		{
+			"mappings": [
+				{
+					"sourceColumn": "user_id",
+					"targetColumn": "user_id"
+				},
+				{
+					"sourceColumn": "third_user_no",
+					"targetColumn": "third_user_no"
+				},
+				{
+					"sourceColumn": "regist_phone",
+					"targetColumn": "regist_phone"
+				},
+				{
+					"sourceColumn": "certi_no",
+					"targetColumn": "certi_no"
+				},
+				{
+					"sourceColumn": "product_code",
+					"targetColumn": "product_code"
+				},
+				{
+					"sourceColumn": "is_longterm_control_group",
+					"targetColumn": "is_longterm_control_group"
+				},
+				{
+					"sourceColumn": "is_total_black_list_flag",
+					"targetColumn": "is_total_black_list_flag"
+				},
+				{
+					"sourceColumn": "overdue_days_max",
+					"targetColumn": "overdue_days_max"
+				},
+				{
+					"sourceColumn": "t2_owner_call",
+					"targetColumn": "t2_owner_call"
+				},
+				{
+					"sourceColumn": "t6_owner_call",
+					"targetColumn": "t6_owner_call"
+				},
+				{
+					"sourceColumn": "t13_owner_call",
+					"targetColumn": "t13_owner_call"
+				},
+				{
+					"sourceColumn": "t20_owner_call",
+					"targetColumn": "t20_owner_call"
+				},
+				{
+					"sourceColumn": "t29_owner_call",
+					"targetColumn": "t29_owner_call"
+				},
+				{
+					"sourceColumn": "t44_owner_call",
+					"targetColumn": "t44_owner_call"
+				},
+				{
+					"sourceColumn": "ytx_cur_agreed_free_amt",
+					"targetColumn": "ytx_cur_agreed_free_amt"
+				},
+				{
+					"sourceColumn": "ytx_is_cur_agreed_used_coupon",
+					"targetColumn": "ytx_is_cur_agreed_used_coupon"
+				},
+				{
+					"sourceColumn": "ytx_is_fst_installment_no_overdue",
+					"targetColumn": "ytx_is_fst_installment_no_overdue"
+				}
+			],
+			"source": "odps_user_tags_bhcs",
+			"target": "selectColumns"
+		},
+		{
+			"mappings": [
+				{
+					"sourceColumn": "user_id",
+					"targetColumn": "user_id"
+				},
+				{
+					"sourceColumn": "third_user_no",
+					"targetColumn": "third_user_no"
+				},
+				{
+					"sourceColumn": "regist_phone",
+					"targetColumn": "regist_phone"
+				},
+				{
+					"sourceColumn": "certi_no",
+					"targetColumn": "certi_no"
+				},
+				{
+					"sourceColumn": "product_code",
+					"targetColumn": "product_code"
+				},
+				{
+					"sourceColumn": "is_longterm_control_group",
+					"targetColumn": "is_longterm_control_group"
+				},
+				{
+					"sourceColumn": "is_total_black_list_flag",
+					"targetColumn": "is_total_black_list_flag"
+				},
+				{
+					"sourceColumn": "overdue_days_max",
+					"targetColumn": "overdue_days_max"
+				},
+				{
+					"sourceColumn": "t2_owner_call",
+					"targetColumn": "t2_owner_call"
+				},
+				{
+					"sourceColumn": "t6_owner_call",
+					"targetColumn": "t6_owner_call"
+				},
+				{
+					"sourceColumn": "t13_owner_call",
+					"targetColumn": "t13_owner_call"
+				},
+				{
+					"sourceColumn": "t20_owner_call",
+					"targetColumn": "t20_owner_call"
+				},
+				{
+					"sourceColumn": "t29_owner_call",
+					"targetColumn": "t29_owner_call"
+				},
+				{
+					"sourceColumn": "t44_owner_call",
+					"targetColumn": "t44_owner_call"
+				},
+				{
+					"sourceColumn": "ytx_cur_agreed_free_amt",
+					"targetColumn": "ytx_cur_agreed_free_amt"
+				},
+				{
+					"sourceColumn": "ytx_is_cur_agreed_used_coupon",
+					"targetColumn": "ytx_is_cur_agreed_used_coupon"
+				},
+				{
+					"sourceColumn": "ytx_is_fst_installment_no_overdue",
+					"targetColumn": "ytx_is_fst_installment_no_overdue"
+				}
+			],
+			"source": "selectColumns",
+			"target": "user_tags_bhcs_${bizdate}"
+		}
+	]
+}

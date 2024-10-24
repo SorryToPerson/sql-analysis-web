@@ -1,0 +1,33 @@
+.code-editor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .code-editor-tool {
+    height: 46px;
+    display: flex;
+    background-color: #7f56d9;
+    align-items: center;
+    padding: 0 20px 0 50px;
+  }
+  .ace_editor {
+    flex: 1;
+    height: 0;
+    .highlight-marker {
+      position: absolute;
+      background-color: rgb(255, 132, 152);
+      z-index: 20;
+    }
+
+    .highlight-table {
+      position: absolute;
+      background-color: rgb(194, 215, 255);
+      z-index: 20;
+    }
+
+    .highlight-feild {
+      position: absolute;
+      background-color: rgb(191, 255, 189);
+      z-index: 20;
+    }
+  }
+}

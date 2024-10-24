@@ -1,0 +1,414 @@
+{
+	"source_data": [
+		{
+			"name": "za_ha_prd.ods_ha_claim_application_all",
+			"type": "table",
+			"server": "your_server_name",
+			"options": {}
+		},
+		{
+			"name": "za_ha_prd.ods_ha_claim_application_extra_info_all",
+			"type": "table",
+			"server": "your_server_name",
+			"options": {}
+		},
+		{
+			"name": "edw_ha_claim_application__loss_code",
+			"type": "table",
+			"server": "your_server_name",
+			"options": {}
+		},
+		{
+			"name": "tmp_ha_claim_application__accident_area",
+			"type": "table",
+			"server": "your_server_name",
+			"options": {}
+		},
+		{
+			"name": "pub_ha_code_value_dim",
+			"type": "table",
+			"server": "your_server_name",
+			"options": {}
+		}
+	],
+	"sql_statements": [
+		{
+			"type": "select",
+			"source_tables": [
+				{
+					"name": "za_ha_prd.ods_ha_claim_application_all",
+					"alias": "t1",
+					"columns": [
+						"id",
+						"report_no",
+						"status",
+						"source",
+						"seppage_path",
+						"loss_type",
+						"accident_place",
+						"accident_process",
+						"reporter",
+						"reporter_insured_relation",
+						"is_deleted",
+						"allow_dispatch",
+						"istpadispatch",
+						"email",
+						"extra_info",
+						"pt"
+					],
+					"partition_by": null
+				},
+				{
+					"name": "za_ha_prd.ods_ha_claim_application_extra_info_all",
+					"alias": "t2",
+					"columns": [
+						"claim_application_id",
+						"pt",
+						"is_deleted",
+						"risk_remark"
+					],
+					"partition_by": null
+				},
+				{
+					"name": "edw_ha_claim_application__loss_code",
+					"alias": "t3",
+					"columns": [
+						"report_no",
+						"loss_code_name"
+					],
+					"partition_by": null
+				},
+				{
+					"name": "tmp_ha_claim_application__accident_area",
+					"alias": "t4",
+					"columns": [
+						"pt",
+						"report_no",
+						"area_name"
+					],
+					"partition_by": null
+				},
+				{
+					"name": "pub_ha_code_value_dim",
+					"alias": "status",
+					"columns": [
+						"src_key",
+						"meta_value",
+						"tb_name",
+						"cl_name"
+					],
+					"partition_by": null
+				},
+				{
+					"name": "pub_ha_code_value_dim",
+					"alias": "case_mark",
+					"columns": [
+						"src_key",
+						"meta_value",
+						"tb_name",
+						"cl_name"
+					],
+					"partition_by": null
+				},
+				{
+					"name": "pub_ha_code_value_dim",
+					"alias": "tpa_source",
+					"columns": [
+						"src_key",
+						"meta_value",
+						"tb_name",
+						"cl_name"
+					],
+					"partition_by": null
+				},
+				{
+					"name": "pub_ha_code_value_dim",
+					"alias": "source",
+					"columns": [
+						"src_key",
+						"meta_value",
+						"tb_name",
+						"cl_name"
+					],
+					"partition_by": null
+				},
+				{
+					"name": "pub_ha_code_value_dim",
+					"alias": "loss_type",
+					"columns": [
+						"src_key",
+						"meta_value",
+						"tb_name",
+						"cl_name"
+					],
+					"partition_by": null
+				},
+				{
+					"name": "pub_ha_code_value_dim",
+					"alias": "reporter_insured_relation",
+					"columns": [
+						"src_key",
+						"meta_value",
+						"tb_name",
+						"cl_name"
+					],
+					"partition_by": null
+				},
+				{
+					"name": "pub_ha_code_value_dim",
+					"alias": "case_tag",
+					"columns": [
+						"src_key",
+						"meta_value",
+						"tb_name",
+						"cl_name"
+					],
+					"partition_by": null
+				}
+			],
+			"joins": [
+				{
+					"type": "left outer",
+					"table": "t2",
+					"on_conditions": [
+						{
+							"source_column": "t1.id",
+							"target_column": "t2.claim_application_id"
+						},
+						{
+							"source_column": "t2.pt",
+							"target_column": "'${bizdate}000000'"
+						},
+						{
+							"source_column": "t2.is_deleted",
+							"target_column": "'N'"
+						}
+					]
+				},
+				{
+					"type": "left outer",
+					"table": "t3",
+					"subquery": {
+						"select_column": [
+							"t1.report_no",
+							"wm_concat(',', loss_code_name) as loss_code_split"
+						],
+						"from_table": "edw_ha_claim_application__loss_code t1",
+						"where": "t1.pt='${bizdate}000000'",
+						"group_by": "t1.report_no"
+					},
+					"on_conditions": [
+						{
+							"source_column": "t1.report_no",
+							"target_column": "t3.report_no"
+						}
+					]
+				},
+				{
+					"type": "left outer",
+					"table": "t4",
+					"on_conditions": [
+						{
+							"source_column": "t4.pt",
+							"target_column": "'${bizdate}000000'"
+						},
+						{
+							"source_column": "t1.report_no",
+							"target_column": "t4.report_no"
+						}
+					]
+				},
+				{
+					"type": "left outer",
+					"table": "status",
+					"on_conditions": [
+						{
+							"source_column": "t1.status",
+							"target_column": "status.src_key"
+						},
+						{
+							"source_column": "status.tb_name",
+							"target_column": "'za_ha_prd.ods_ha_claim_application_all'"
+						},
+						{
+							"source_column": "status.cl_name",
+							"target_column": "'status'"
+						}
+					]
+				},
+				{
+					"type": "left outer",
+					"table": "case_mark",
+					"on_conditions": [
+						{
+							"source_column": "t1.case_mark",
+							"target_column": "case_mark.src_key"
+						},
+						{
+							"source_column": "case_mark.tb_name",
+							"target_column": "'za_ha_prd.ods_ha_claim_application_all'"
+						},
+						{
+							"source_column": "case_mark.cl_name",
+							"target_column": "'case_mark'"
+						}
+					]
+				},
+				{
+					"type": "left outer",
+					"table": "tpa_source",
+					"on_conditions": [
+						{
+							"source_column": "t1.tpa_source",
+							"target_column": "tpa_source.src_key"
+						},
+						{
+							"source_column": "tpa_source.tb_name",
+							"target_column": "'za_ha_prd.ods_ha_claim_application_all'"
+						},
+						{
+							"source_column": "tpa_source.cl_name",
+							"target_column": "'tpa_source'"
+						}
+					]
+				},
+				{
+					"type": "left outer",
+					"table": "source",
+					"on_conditions": [
+						{
+							"source_column": "t1.source",
+							"target_column": "source.src_key"
+						},
+						{
+							"source_column": "source.tb_name",
+							"target_column": "'za_ha_prd.ods_ha_claim_application_all'"
+						},
+						{
+							"source_column": "source.cl_name",
+							"target_column": "'source'"
+						}
+					]
+				},
+				{
+					"type": "left outer",
+					"table": "loss_type",
+					"on_conditions": [
+						{
+							"source_column": "coalesce(t1.loss_type, 'illness')",
+							"target_column": "loss_type.src_key"
+						},
+						{
+							"source_column": "loss_type.tb_name",
+							"target_column": "'za_ha_prd.ods_ha_claim_application_all'"
+						},
+						{
+							"source_column": "loss_type.cl_name",
+							"target_column": "'loss_type'"
+						}
+					]
+				},
+				{
+					"type": "left outer",
+					"table": "reporter_insured_relation",
+					"on_conditions": [
+						{
+							"source_column": "t1.reporter_insured_relation",
+							"target_column": "reporter_insured_relation.src_key"
+						},
+						{
+							"source_column": "reporter_insured_relation.tb_name",
+							"target_column": "'za_ha_prd.ods_ha_claim_application_all'"
+						},
+						{
+							"source_column": "reporter_insured_relation.cl_name",
+							"target_column": "'reporter_insured_relation'"
+						}
+					]
+				},
+				{
+					"type": "left outer",
+					"table": "case_tag",
+					"on_conditions": [
+						{
+							"source_column": "t1.case_tag",
+							"target_column": "case_tag.src_key"
+						},
+						{
+							"source_column": "case_tag.tb_name",
+							"target_column": "'za_ha_prd.ods_ha_claim_application_all'"
+						},
+						{
+							"source_column": "case_tag.cl_name",
+							"target_column": "'case_tag'"
+						}
+					]
+				}
+			],
+			"lateral_views": [
+				{
+					"view": "json_tuple(t1.extra_info, 'masterInsuredInfo', 'isNeedClaimDivision', 'planCodeList', 'materialSmsSend', 'customerNo', 'accidentDate', 'sysLocMobileNo', 'syncVersion', 'claimReturnChannelKey', 'importDataSource')",
+					"expression": "t1.extra_info",
+					"fields": [
+						"masterInsuredInfo",
+						"isNeedClaimDivision",
+						"planCodeList",
+						"materialSmsSend",
+						"customerNo",
+						"accidentDate",
+						"sysLocMobileNo",
+						"syncVersion",
+						"claimReturnChannelKey",
+						"importDataSource"
+					],
+					"alias": "extra_info"
+				},
+				{
+					"view": "json_tuple(t2.risk_remark, 'riskName', 'riskDetail', 'riskResult')",
+					"expression": "t2.risk_remark",
+					"fields": [
+						"riskName",
+						"riskDetail",
+						"riskResult"
+					],
+					"alias": "risk_remark"
+				}
+			],
+			"select_columns": [
+				"t1.id",
+				"t1.report_no",
+				"t1.status",
+				"coalesce(status.meta_value, t1.status) status_name",
+				"t1.source",
+				"coalesce(source.meta_value, t1.source) source_name",
+				"t1.seppage_path",
+				"coalesce(t1.loss_type, 'illness') loss_type",
+				"coalesce(loss_type.meta_value, t1.loss_type) loss_type_name",
+				"t4.area_name accident_area_name",
+				"t1.accident_place",
+				"t1.accident_process",
+				"t1.reporter",
+				"t1.reporter_insured_relation",
+				"coalesce(reporter_insured_relation.meta_value, t1.reporter_insured_relation) reporter_insured_relation_name",
+				"t1.is_deleted",
+				"t1.allow_dispatch",
+				"t1.istpadispatch",
+				"t1.email",
+				"extra_info.masterInsuredInfo",
+				"extra_info.isNeedClaimDivision",
+				"extra_info.planCodeList",
+				"extra_info.materialSmsSend",
+				"extra_info.customerNo",
+				"extra_info.accidentDate",
+				"extra_info.sysLocMobileNo",
+				"extra_info.syncVersion",
+				"extra_info.claimReturnChannelKey",
+				"extra_info.importDataSource",
+				"risk_remark.riskName",
+				"risk_remark.riskDetail",
+				"risk_remark.riskResult"
+			],
+			"where_clause": "t1.pt = '${bizdate}000000'"
+		}
+	]
+}

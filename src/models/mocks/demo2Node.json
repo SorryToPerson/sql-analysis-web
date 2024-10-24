@@ -1,0 +1,172 @@
+{
+  "source": [
+    {
+      "alias": "",
+      "columns": ["employee_id", "total_salary"],
+      "name": "tmp_salary",
+      "type": "targetTable"
+    },
+    {
+      "columns": ["s.employee_id", "SUM(s.salary) AS total_salary"],
+      "name": "selectColumns0",
+      "type": "selectColumns"
+    },
+    {
+      "alias": "s",
+      "columns": ["employee_id", "salary"],
+      "name": "salary",
+      "type": "sourceTable"
+    },
+    {
+      "alias": "",
+      "columns": ["employee_id", "name", "gender", "date_of_birth", "date_of_hire", "department_name", "total_salary", "bonus"],
+      "name": "employee_income",
+      "type": "targetTable"
+    },
+    {
+      "columns": ["e.employee_id", "e.name", "e.gender", "e.date_of_birth", "e.date_of_hire", "d.department_name", "ts.total_salary", "b.bonus"],
+      "name": "selectColumns1",
+      "type": "selectColumns"
+    },
+    {
+      "alias": "e",
+      "columns": ["employee_id", "name", "gender", "date_of_birth", "date_of_hire"],
+      "name": "employee",
+      "type": "sourceTable"
+    },
+    {
+      "alias": "d",
+      "columns": ["department_name"],
+      "name": "department",
+      "type": "sourceTable"
+    },
+    {
+      "alias": "ts",
+      "columns": ["total_salary"],
+      "name": "tmp_salary",
+      "type": "sourceTable"
+    },
+    {
+      "alias": "b",
+      "columns": ["bonus"],
+      "name": "bonus",
+      "type": "sourceTable"
+    }
+  ],
+  "statements": [
+    {
+      "mappings": [
+        {
+          "sourceColumn": "employee_id",
+          "targetColumn": "s.employee_id"
+        }
+      ],
+      "source": "salary",
+      "target": "selectColumns0"
+    },
+    {
+      "mappings": [
+        {
+          "sourceColumn": "s.employee_id",
+          "targetColumn": "employee_id"
+        }
+      ],
+      "source": "selectColumns0",
+      "target": "tmp_salary"
+    },
+    {
+      "mappings": [
+        {
+          "sourceColumn": "employee_id",
+          "targetColumn": "e.employee_id"
+        },
+        {
+          "sourceColumn": "name",
+          "targetColumn": "e.name"
+        },
+        {
+          "sourceColumn": "gender",
+          "targetColumn": "e.gender"
+        },
+        {
+          "sourceColumn": "date_of_birth",
+          "targetColumn": "e.date_of_birth"
+        },
+        {
+          "sourceColumn": "date_of_hire",
+          "targetColumn": "e.date_of_hire"
+        }
+      ],
+      "source": "employee",
+      "target": "selectColumns1"
+    },
+    {
+      "mappings": [
+        {
+          "sourceColumn": "department_name",
+          "targetColumn": "d.department_name"
+        }
+      ],
+      "source": "department",
+      "target": "selectColumns1"
+    },
+    {
+      "mappings": [
+        {
+          "sourceColumn": "total_salary",
+          "targetColumn": "ts.total_salary"
+        }
+      ],
+      "source": "tmp_salary",
+      "target": "selectColumns1"
+    },
+    {
+      "mappings": [
+        {
+          "sourceColumn": "bonus",
+          "targetColumn": "b.bonus"
+        }
+      ],
+      "source": "bonus",
+      "target": "selectColumns1"
+    },
+    {
+      "mappings": [
+        {
+          "sourceColumn": "e.employee_id",
+          "targetColumn": "employee_id"
+        },
+        {
+          "sourceColumn": "e.name",
+          "targetColumn": "name"
+        },
+        {
+          "sourceColumn": "e.gender",
+          "targetColumn": "gender"
+        },
+        {
+          "sourceColumn": "e.date_of_birth",
+          "targetColumn": "date_of_birth"
+        },
+        {
+          "sourceColumn": "e.date_of_hire",
+          "targetColumn": "date_of_hire"
+        },
+        {
+          "sourceColumn": "d.department_name",
+          "targetColumn": "department_name"
+        },
+        {
+          "sourceColumn": "ts.total_salary",
+          "targetColumn": "total_salary"
+        },
+        {
+          "sourceColumn": "b.bonus",
+          "targetColumn": "bonus"
+        }
+      ],
+      "source": "selectColumns1",
+      "target": "employee_income"
+    }
+  ]
+}
